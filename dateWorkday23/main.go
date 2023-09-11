@@ -76,7 +76,6 @@ func getHolidays() []time.Time {
 func getNextWorkDay(firstDate time.Time, givendays int, holyList []time.Time) time.Time {
 	var counter int
 
-	// till counter matches given days
 	for counter != givendays {
 		// if minus bussines days given
 		if givendays <= 0 {
@@ -88,7 +87,7 @@ func getNextWorkDay(firstDate time.Time, givendays int, holyList []time.Time) ti
 			// if positive bussiness given
 		} else {
 			firstDate = firstDate.AddDate(0, 0, 1)
-			// if not a holiday then count
+			
 			if !isHoliday(firstDate, holyList) {
 				counter++
 			}

@@ -34,7 +34,7 @@ func TestGetNextWorkDay(t *testing.T) {
 }
 
 /*************************************************************************************
-* Below code if for my future reference : either you can loop all data like above else
+* 1st Approach : either you can loop all data like above else
 * you can write seperate methode like below for all
 * ************************************************************************************/
 
