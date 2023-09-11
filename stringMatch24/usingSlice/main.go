@@ -26,7 +26,6 @@ func main() {
 	var name string
 	nameRecords := make([]string, 0)
 
-	fmt.Println("nameRecords - len :: ", len(nameRecords), " size/cap :: ", cap(nameRecords))
 	fmt.Println("Enter the name to add in records or \"done\" to exit ::")
 	fmt.Scanln(&name)
 	nameRecords = addRecord(name, nameRecords)
@@ -40,8 +39,6 @@ func main() {
 	} else {
 		fmt.Println(name, "does not exist")
 	}
-
-	fmt.Println("nameRecords - len :: ", len(nameRecords), " size/cap :: ", cap(nameRecords))
 
 	log.Println("end: assignment", ASSIGNMENT_NUMBER)
 }
