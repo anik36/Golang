@@ -25,17 +25,15 @@ func main() {
 	var dateToCheckStr string
 	log.Println("started: assignment", ASSIGNMENT_NUMBER)
 
+	// get holiday list from user
 	holyList := getHolidays()
 
-	// get date to check from user
 	fmt.Println("Enter the date to check (DD/MM/YYYY):")
 	fmt.Scanln(&dateToCheckStr)
 	dateToCheck, err := time.Parse(DATE_FORMAT, dateToCheckStr)
 	if err != nil {
 		log.Fatal(constants.ERROR_17_1)
 	}
-
-	fmt.Println("holiday list ::", holyList)
 
 	if isHoliday(dateToCheck, holyList) {
 		fmt.Println(dateToCheckStr, "is a holiday.")
@@ -52,7 +50,7 @@ func getHolidays() []time.Time {
 	var holidayList []time.Time
 	var holidayStr string
 
-	fmt.Println("Enter holiday date (DD/MM/YYYY) or \"proceed\" to end:")
+	fmt.Println("Enter holiday date (DD/MM/YYYY) or \"proceed\" to end:", time.Date(0001, 1, 1, 0, 0, 0, 0, time.UTC))
 	fmt.Scanln(&holidayStr)
 	// loop & add to slice till proceed is entered
 	for holidayStr != "proceed" {
@@ -69,7 +67,6 @@ func getHolidays() []time.Time {
 // isHoliday : This will return true if the given date contains in slice or saturday/sunday
 func isHoliday(dateToCheck time.Time, holidayList []time.Time) bool {
 
-	// check for saturday & sunday & holiday in given slice
 	if slices.Contains(holidayList, dateToCheck) || dateToCheck.Weekday() == time.Saturday || dateToCheck.Weekday() == time.Sunday {
 		return true
 	}
