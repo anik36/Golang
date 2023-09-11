@@ -16,7 +16,7 @@ import (
 
 const (
 	ASSIGNMENT_NUMBER = 27
-	URL               = "http://remiges.tech"
+	URL               = "https://merce.co"
 )
 
 func main() {
