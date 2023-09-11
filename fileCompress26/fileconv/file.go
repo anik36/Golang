@@ -11,31 +11,29 @@ import (
 
 // File2Zip : This function will add the given file to zip on given path where
 // 'path' is the actual file path wothout file name, 'fileToAdd' is the actual file name,
-// 'zipFileName' is the output zip file name & return false on failed operation
+// 'zipFileName' is the output zip file name
 func File2Zip(path string, fileToAdd string, zipFileName string) bool {
 	// Read the given file and return data in []byte
 	contents, err := os.ReadFile(path + fileToAdd)
 	if err != nil {
 		log.Fatal(constants.ERROR_26_2, err)
-		return false
 	}
 	// Create the zip file
 	zipReader, err := os.Create(path + zipFileName)
 	if err != nil {
 		log.Fatal(constants.ERROR_26_3, err)
-		return false
 	}
-	// Create a new gzip writer
-	gzWriter := zip.NewWriter(zipReader)
+	// Create a zip writer
+	zipWriter := zip.NewWriter(zipReader)
 
-	reader, err := gzWriter.Create(fileToAdd)
+	// adds a file to the zip file using the provided name
+	reader, err := zipWriter.Create(fileToAdd)
 	if err != nil {
 		log.Fatal(constants.ERROR_26_4, err)
-		return false
 	}
 	// Writing bytes into zip file
 	reader.Write(contents)
-	gzWriter.Close()
+	zipWriter.Close()
 	return true
 }
 
