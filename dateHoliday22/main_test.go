@@ -25,6 +25,8 @@ func TestCalculateHolidays(t *testing.T) {
 		{"First date after second date", time.Date(2023, 9, 3, 0, 0, 0, 0, time.Local), time.Date(2023, 9, 2, 0, 0, 0, 0, time.Local), -1, -1, constants.ERROR_22_1},
 		{"Holiday in the middle", time.Date(2023, 9, 13, 0, 0, 0, 0, time.Local), time.Date(2023, 9, 15, 0, 0, 0, 0, time.Local), 1, 2, ""},
 		{"Both same date", time.Date(2023, 9, 13, 0, 0, 0, 0, time.Local), time.Date(2023, 9, 13, 0, 0, 0, 0, time.Local), -1, -1, constants.ERROR_22_1},
+		{"Saturday and Sunday", time.Date(2023, 9, 9, 0, 0, 0, 0, time.Local), time.Date(2023, 9, 10, 0, 0, 0, 0, time.Local), 2, 0, ""},
+
 	}
 	for _, test := range testData {
 		t.Run(test.description, func(t *testing.T) {

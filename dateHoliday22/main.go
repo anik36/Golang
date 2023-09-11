@@ -24,6 +24,7 @@ func main() {
 	var firstDateStr, secondDateStr string
 	log.Println("started: assignment", ASSIGNMENT_NUMBER)
 
+	// get holiday list
 	holyList := getHolidays()
 
 	// get the two dates from the user.
@@ -77,12 +78,15 @@ func getHolidays() []time.Time {
 // calculateHolidays : This will return holidays, workDays by checking from sunday, saturday and holiday list
 func calculateHolidays(firstDate, secondDate time.Time, holyList []time.Time) (int, int, string) {
 	var holidays, workDays int
-	// If firstDate is before secondDate give msg & return -1,-1
+	// If firstDate is not before secondDate then give return -1,-1
 	if !firstDate.Before(secondDate) {
 		return -1, -1, constants.ERROR_22_1
 	}
-	// Calculate the number of weekend days
+	// Loop through the day if it is Saturday then add 1 to current iterating day
+	// (so that when next iteration will add 1 more and will start with adding 2 into current day)
+	// if it is Sunday/contains in slice just count holiday
 	for day := firstDate; day.Before(secondDate.AddDate(0, 0, 1)); day = day.AddDate(0, 0, 1) {
+
 		switch day.Weekday() == time.Saturday {
 		case true:
 			holidays += 2
@@ -92,17 +96,6 @@ func calculateHolidays(firstDate, secondDate time.Time, holyList []time.Time) (i
 		default:
 			workDays++
 		}
-
-		// if slices.Contains(holyList, day) {
-		// 	holidays++
-		// } else {
-		// 	workDays++
-		// }
-		// if slices.Contains(holyList, day) || day.Weekday() == time.Saturday || day.Weekday() == time.Sunday {
-		// 	holidays++
-		// } else {
-		// 	workDays++
-		// }
 	}
 	return holidays, workDays, ""
 }
