@@ -26,7 +26,7 @@ func main() {
 	// Prompt the user to enter names.
 	fmt.Println("Enter names of candidates (enter 'done' to stop):")
 	for {
-		fmt.Scan(&name)
+		fmt.Scanln(&name)
 
 		if name == "done" {
 			break
@@ -36,7 +36,7 @@ func main() {
 
 	// Prompt the user for a search pattern.
 	fmt.Println("Enter a pattern to search :")
-	fmt.Scan(&searchPattern)
+	fmt.Scanln(&searchPattern)
 
 	matchedNames := getMatchedNames(searchPattern, names)
 
