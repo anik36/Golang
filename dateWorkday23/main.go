@@ -38,12 +38,12 @@ func main() {
 
 	fmt.Println("Enter number of business days:")
 	fmt.Scanln(&businessDayStr)
-	businessDays, err := strconv.ParseInt(businessDayStr, 10, 64)
+	businessDays, err := strconv.Atoi(businessDayStr)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	nextWorkDay := getNextWorkDay(startDate, int(businessDays), holyList)
+	nextWorkDay := getNextWorkDay(startDate, businessDays, holyList)
 
 	fmt.Println("holiday list ::", holyList)
 
@@ -87,7 +87,7 @@ func getNextWorkDay(firstDate time.Time, givendays int, holyList []time.Time) ti
 			// if positive bussiness given
 		} else {
 			firstDate = firstDate.AddDate(0, 0, 1)
-			
+
 			if !isHoliday(firstDate, holyList) {
 				counter++
 			}

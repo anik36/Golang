@@ -22,7 +22,6 @@ func main() {
 	// date := time.Date(2023, 12, 31, 24, 60, 100, 100, time.Local)
 
 	date := time.Now()
-
 	formats.PrintDateFormats(date)
 
 	log.Println("end: assignment", ASSIGNMENT_NUMBER)

@@ -7,6 +7,7 @@ import (
 	"os"
 	"strings"
 
+	"redmine.merce.co/git/go-learning-project/anikets/constants"
 	"redmine.merce.co/git/go-learning-project/anikets/regex"
 )
 
@@ -20,7 +21,7 @@ const (
 	ASSIGNMENT_NUMBER = 29
 )
 
-// go run wordCount.go "/media/merceadm/9c8cbcfa-7a63-4b30-910a-2586f19beb53/Aniket/Downloads/input.txt"
+// go run word_count.go "/media/aniket/9c8cbcfa-7a63-4b30-910a-2586f19beb53/Aniket/Downloads/HTML_GO/merce-homepage.html.zip"
 func main() {
 	args := os.Args[1:]
 	log.Println("started: assignment", ASSIGNMENT_NUMBER)
@@ -30,9 +31,13 @@ func main() {
 	}
 
 	filename := args[0]
+	// allow only text file to read
+	if !strings.HasSuffix(filename, constants.SUPPORTED_FILE_FORMAT) {
+		log.Fatal("only text file is supported!")
+	}
 
 	wordCounts, err := wordReader(filename)
-	if err != "" {
+	if err != nil {
 		log.Fatal(err)
 	}
 
@@ -43,11 +48,11 @@ func main() {
 	log.Println("end: assignment", ASSIGNMENT_NUMBER)
 }
 
-func wordReader(filePath string) (map[string]int, string) {
+func wordReader(filePath string) (map[string]int, error) {
 	wordCounts := make(map[string]int)
 	file, err := os.Open(filePath)
 	if err != nil {
-		return wordCounts, fmt.Sprint(err)
+		return wordCounts, err
 	}
 	defer file.Close()
 
@@ -59,5 +64,5 @@ func wordReader(filePath string) (map[string]int, string) {
 		word = regex.RemoveSymbols(word)
 		wordCounts[word]++
 	}
-	return wordCounts, ""
+	return wordCounts, nil
 }

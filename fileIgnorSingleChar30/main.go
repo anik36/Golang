@@ -6,6 +6,8 @@ import (
 	"log"
 	"os"
 	"strings"
+
+	"redmine.merce.co/git/go-learning-project/anikets/constants"
 )
 
 /******************************************************************************************
@@ -17,7 +19,7 @@ const (
 	ASSIGNMENT_NUMBER = 30
 )
 
-// go run main.go "/media/merceadm/9c8cbcfa-7a63-4b30-910a-2586f19beb53/Aniket/Downloads/input.txt"
+// go run main.go "/media/aniket/9c8cbcfa-7a63-4b30-910a-2586f19beb53/Aniket/Downloads/input.txt"
 
 func main() {
 	commonWords := []string{"the", "an", "to", "of", "and", "in", "on", "is", "it"}
@@ -30,6 +32,11 @@ func main() {
 	}
 
 	filename := args[0]
+	// allow only text file to read
+	if !strings.HasSuffix(filename, constants.SUPPORTED_FILE_FORMAT) {
+		log.Fatal("only text file is supported!")
+	}
+
 	file, err := os.Open(filename)
 	if err != nil {
 		log.Fatal(err)
