@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"log"
-	"strconv"
 	"time"
 
 	"golang.org/x/exp/slices"
@@ -24,7 +23,8 @@ const (
 )
 
 func main() {
-	var dateStr, businessDayStr string
+	var dateStr string
+	var businessDays int
 	log.Println("started: assignment", ASSIGNMENT_NUMBER)
 
 	holyList := getHolidays()
@@ -37,11 +37,8 @@ func main() {
 	}
 
 	fmt.Println("Enter number of business days:")
-	fmt.Scanln(&businessDayStr)
-	businessDays, err := strconv.Atoi(businessDayStr)
-	if err != nil {
-		log.Fatal(err)
-	}
+	fmt.Scanln(&businessDays)
+	fmt.Println("businessDays ::", businessDays)
 
 	nextWorkDay := getNextWorkDay(startDate, businessDays, holyList)
 
@@ -55,6 +52,7 @@ func main() {
 
 // getHolidays : will collect holidays from user
 func getHolidays() []time.Time {
+
 	var holidayList []time.Time
 	var holidayStr string
 
@@ -73,34 +71,28 @@ func getHolidays() []time.Time {
 }
 
 // getNextWorkDay : it will return the next working day by calculating given business days
-func getNextWorkDay(firstDate time.Time, givendays int, holyList []time.Time) time.Time {
-	var counter int
-
+func getNextWorkDay(startDate time.Time, givendays int, holyList []time.Time) time.Time {
+	var counter, iteration int
 	for counter != givendays {
+		fmt.Println(iteration)
+		iteration++
 		// if minus bussines days given
 		if givendays <= 0 {
-			firstDate = firstDate.AddDate(0, 0, -1)
-			// if not a holiday then count but for negative side
-			if !isHoliday(firstDate, holyList) {
+			startDate = startDate.AddDate(0, 0, -1)
+			if startDate.Weekday() == time.Sunday {
+				startDate = startDate.AddDate(0, 0, -1)
+			} else if !(slices.Contains(holyList, startDate) || startDate.Weekday() == time.Saturday) {
 				counter--
 			}
 			// if positive bussiness given
 		} else {
-			firstDate = firstDate.AddDate(0, 0, 1)
-
-			if !isHoliday(firstDate, holyList) {
+			startDate = startDate.AddDate(0, 0, 1)
+			if startDate.Weekday() == time.Saturday {
+				startDate = startDate.AddDate(0, 0, 1)
+			} else if !(slices.Contains(holyList, startDate) || startDate.Weekday() == time.Sunday) {
 				counter++
 			}
 		}
 	}
-	return firstDate
-}
-
-// isHoliday : it return true if slice contains given date or it is saturday / sunday
-func isHoliday(dateToCheck time.Time, holidayList []time.Time) bool {
-	// check for saturday & sunday & holiday slice
-	if slices.Contains(holidayList, dateToCheck) || dateToCheck.Weekday() == time.Saturday || dateToCheck.Weekday() == time.Sunday {
-		return true
-	}
-	return false
+	return startDate
 }
