@@ -5,12 +5,8 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-)
 
-const (
-	PORT_NUMBER = ":9094"
-	SERVER_CERT = "/media/aniket/9c8cbcfa-7a63-4b30-910a-2586f19beb53/Aniket/Documents/GIT ANIKET/advanced-go/SSL/server.crt"
-	SERVER_KEY  = "/media/aniket/9c8cbcfa-7a63-4b30-910a-2586f19beb53/Aniket/Documents/GIT ANIKET/advanced-go/SSL/server.key"
+	applicationproperties "github.com/anik36/Golang/tree/advanced-go/application-properties"
 )
 
 // Home is the home page handler
@@ -59,6 +55,6 @@ func main() {
 	http.HandleFunc("/about", About)
 	http.HandleFunc("/divide", Divide)
 
-	fmt.Println("Starting application on port", PORT_NUMBER)
-	_ = http.ListenAndServeTLS(PORT_NUMBER, SERVER_CERT, SERVER_KEY, nil)
+	fmt.Println("Starting application on port", applicationproperties.PORT_NUMBER)
+	_ = http.ListenAndServeTLS(applicationproperties.PORT_NUMBER, applicationproperties.SERVER_CERT, applicationproperties.SERVER_KEY, nil)
 }

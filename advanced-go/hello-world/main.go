@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+
+	applicationproperties "github.com/anik36/Golang/tree/advanced-go/application-properties"
 )
 
 func main() {
@@ -16,5 +18,5 @@ func main() {
 		}
 	})
 
-	_ = http.ListenAndServe(":9094", nil)
+	_ = http.ListenAndServe(applicationproperties.PORT_NUMBER, nil)
 }
