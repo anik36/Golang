@@ -5,7 +5,7 @@ import (
 	"log"
 	"net/http"
 
-	applicationproperties "github.com/anik36/Golang/tree/advanced-go/application-properties"
+	"github.com/anik36/Golang/tree/advanced-go/constants"
 )
 
 func main() {
@@ -18,5 +18,5 @@ func main() {
 		}
 	})
 
-	_ = http.ListenAndServe(applicationproperties.PORT_NUMBER, nil)
+	_ = http.ListenAndServe(constants.PORT_NUMBER, nil)
 }

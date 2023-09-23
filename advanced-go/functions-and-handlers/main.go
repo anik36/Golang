@@ -5,7 +5,7 @@ import (
 	"log"
 	"net/http"
 
-	applicationproperties "github.com/anik36/Golang/tree/advanced-go/application-properties"
+	"github.com/anik36/Golang/tree/advanced-go/constants"
 )
 
 // Home is the home page handler
@@ -36,6 +36,6 @@ func main() {
 	http.HandleFunc("/home", Home)
 	http.HandleFunc("/about", About)
 
-	fmt.Println("Starting application on port", applicationproperties.PORT_NUMBER)
-	_ = http.ListenAndServeTLS(applicationproperties.PORT_NUMBER, applicationproperties.SERVER_CERT, applicationproperties.SERVER_KEY, nil)
+	fmt.Println("Starting application on port", constants.PORT_NUMBER)
+	_ = http.ListenAndServeTLS(constants.PORT_NUMBER, constants.SERVER_CERT, constants.SERVER_KEY, nil)
 }
