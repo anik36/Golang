@@ -1,0 +1,8 @@
+{
+    "Realm": "remiges-tech",
+    "BaseUrl": "http://0.0.0.0:8080/",
+    "RestApi": {
+        "ClientId": "MCX",
+        "ClientSecret": "OFyNKbP4g6sYtR4nACtS4V30ILsruzY1"
+    }
+}
