@@ -1,0 +1,27 @@
+required:
+  code: "missing"
+  msgcode: 45
+
+email:
+  code: "invalid_email"
+  msgcode: 50
+
+emaildomain:
+  code: "invalid_email"
+  msgcode: 51
+
+min:
+  code: "outofrange"
+  msgcode: 55
+
+max:
+  code: "outofrange"
+  msgcode: 55
+
+invalidjson:
+  code: "invalid_json"
+  msgcode: 400
+
+unknown:
+  code: "unknown"
+  msgcode: 0
